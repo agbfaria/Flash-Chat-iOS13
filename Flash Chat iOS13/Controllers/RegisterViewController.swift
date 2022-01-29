@@ -19,8 +19,8 @@ class RegisterViewController: UIViewController {
         if let email = emailTextfield.text, let password = passwordTextfield.text {
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error {
-                    Utils().track(e)
-                    Utils().track(e.localizedDescription)
+                    ErrorController().track(e)
+                    ErrorController().track(e.localizedDescription)
                 } else {
                     //Navigate to ChatViewController
                     self.performSegue(withIdentifier: K.registerSegue, sender: self)

@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
         if let email = emailTextfield.text, let password = passwordTextfield.text {
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let e = error{
-                    Utils().track(e)
+                    ErrorController().track(e)
                 } else {
                     self.performSegue(withIdentifier: K.loginSegue, sender: self)
                 }

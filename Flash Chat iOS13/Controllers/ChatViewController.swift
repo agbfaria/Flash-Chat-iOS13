@@ -42,7 +42,7 @@ class ChatViewController: UIViewController {
             
             self.messages = []
             if let e = error {
-                Utils().track(e, "Error retrieving data from Firestore")
+                ErrorController().track(e, "Error retrieving data from Firestore")
             } else {
                 if let snapshotDocs = querySnapshot?.documents {
                     for doc in snapshotDocs {
@@ -54,6 +54,8 @@ class ChatViewController: UIViewController {
                             
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
+                                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
                             }
                         }
                     }
@@ -73,9 +75,12 @@ class ChatViewController: UIViewController {
             ]) { (error) in
                 if let e = error {
                     let message = "There was an issue saving data to Firestore"
-                    Utils().track(e, message)
+                    ErrorController().track(e, message)
                 } else {
                     print("Data saved!")
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
                 }
             }
         }
@@ -86,7 +91,7 @@ class ChatViewController: UIViewController {
           try Auth.auth().signOut()
             navigationController?.popToRootViewController(animated: true)
         } catch let signOutError as NSError {
-            Utils().track(signOutError)
+            ErrorController().track(signOutError)
             print("Error signing out: %@", signOutError)
         }
     }
@@ -97,9 +102,25 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
         
-        cell.label.text = messages[indexPath.row].body
+        let message = messages[indexPath.row]
+        cell.label.text = message.body
+        
+        //Message from the user
+        if message.sender == Auth.auth().currentUser?.email {
+            cell.rightImageView.isHidden = false
+            cell.leftImageView.isHidden = true
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.lightPurple)
+            cell.label.textColor = UIColor(named: K.BrandColors.purple)
+        } else {
+            cell.rightImageView.isHidden = true
+            cell.leftImageView.isHidden = false
+            cell.messageBubble.backgroundColor = UIColor(named: K.BrandColors.purple)
+            cell.label.textColor = UIColor(named: K.BrandColors.lightPurple)
+        }
+        
         return cell
     }
     

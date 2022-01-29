@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Utils {
+class ErrorController {
     
     
     public func track(_ message: String, file: String = #file, function: String = #function, line: Int = #line ) {

@@ -21,18 +21,24 @@
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vMg-Af-vgL">
                         <rect key="frame" x="10" y="10" width="486" height="244"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cp1-yc-vOi" userLabel="messageBubble">
-                                <rect key="frame" x="0.0" y="0.0" width="426" height="61"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YouAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="iNA-rs-yIP">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="2EZ-69-y9k"/>
+                                    <constraint firstAttribute="height" constant="40" id="Lsy-Kq-Gf2"/>
+                                </constraints>
+                            </imageView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cp1-yc-vOi" userLabel="messageBubble">
+                                <rect key="frame" x="60" y="0.0" width="366" height="61"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label aisdj a asijda  aoijd asdj adk adlk nad aln ad na ,dman anda,sdn a,mnd a" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeF-IV-6cv">
-                                        <rect key="frame" x="10" y="10" width="406" height="41"/>
-                                        <color key="backgroundColor" name="BrandPurple"/>
+                                        <rect key="frame" x="10" y="10" width="346" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" name="BrandLightPurple"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" name="BrandPurple"/>
+                                <color key="tintColor" name="BrandBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="aeF-IV-6cv" secondAttribute="trailing" constant="10" id="jTN-NM-Qwa"/>
                                     <constraint firstAttribute="bottom" secondItem="aeF-IV-6cv" secondAttribute="bottom" constant="10" id="oub-Ot-fcr"/>
@@ -60,6 +66,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="label" destination="aeF-IV-6cv" id="ckn-nX-IBX"/>
+                <outlet property="leftImageView" destination="iNA-rs-yIP" id="NYP-24-rj6"/>
                 <outlet property="messageBubble" destination="cp1-yc-vOi" id="gJm-nh-i1I"/>
                 <outlet property="rightImageView" destination="uBR-Pp-UM1" id="3UI-Mu-OYT"/>
             </connections>
@@ -68,11 +75,12 @@
     </objects>
     <resources>
         <image name="MeAvatar" width="36" height="36"/>
+        <image name="YouAvatar" width="36" height="36"/>
+        <namedColor name="BrandBlue">
+            <color red="0.16500000655651093" green="0.77999997138977051" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="BrandLightPurple">
             <color red="0.98000001907348633" green="0.9649999737739563" blue="0.99599999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="BrandPurple">
-            <color red="0.67500001192092896" green="0.43500000238418579" blue="0.9179999828338623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
